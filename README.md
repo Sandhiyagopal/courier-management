@@ -152,17 +152,17 @@ Public (no authentication)
 - Live tracking on map
 - PDF invoice generation
 
- Contributing
+Contributing
 
 Pull requests are welcome. For major changes, please open an issue first.
 
- License
+License
 
 MIT
 
 Author
 
-Your Name – your.email@example.com
+Your Name – sandhiya.g@gmail.com
 
  Acknowledgements
 
