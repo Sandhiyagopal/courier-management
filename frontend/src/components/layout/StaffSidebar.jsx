@@ -36,13 +36,13 @@ export default function StaffSidebar() {
         ))}
       </nav>
       <div className="p-4 border-t border-gray-700">
-        <button
+        {/* <button
           onClick={logout}
           className="flex items-center gap-3 w-full px-4 py-2 text-red-400 hover:bg-gray-800 rounded transition-colors"
         >
           <LogOut size={20} />
           <span>Logout</span>
-        </button>
+        </button> */}
       </div>
     </aside>
   );

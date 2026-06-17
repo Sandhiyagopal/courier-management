@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../middleware/authMiddleware');
 const role = require('../middleware/roleMiddleware');
 const courierController = require('../controllers/courierController');
+const staffController = require('../controllers/staffController');
 
 const router = express.Router();
 router.use(auth);

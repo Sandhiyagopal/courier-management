@@ -18,7 +18,7 @@ export default function AdminLayout() {
             <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center">
               {user?.name?.charAt(0) || 'A'}
             </div>
-            <button onClick={logout} className="flex items-center gap-2 px-4 py-2 text-red-400 hover:bg-red-400 rounded transition-colors">
+            <button onClick={logout} className="flex items-center gap-2 px-4 py-2 text-red-400 rounded transition-colors">
                 <LogOut size={20} />
                 <span>Logout</span>
             </button>

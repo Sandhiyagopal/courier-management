@@ -32,17 +32,54 @@ exports.addCourier = async (req, res) => {
 };
 
 // Update courier status (Staff)
+// Update courier status (Staff)
 exports.updateStatus = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params;   // This may be RefNumber (e.g., 'CR123456') or numeric ID
     const { status, remark } = req.body;
+
+    if (!status) {
+        return res.status(400).json({ message: 'Status is required' });
+    }
+
     try {
-        await db.query('UPDATE tblcourier SET Status=? WHERE ID=?', [status, id]);
+        let query, params;
+        
+        // Check if id is numeric (integer) or alphanumeric (reference number)
+        if (/^\d+$/.test(id)) {
+            // Numeric ID
+            query = 'UPDATE tblcourier SET Status=? WHERE ID=?';
+            params = [status, id];
+        } else {
+            // Reference number (like CR123456)
+            query = 'UPDATE tblcourier SET Status=? WHERE RefNumber=?';
+            params = [status, id];
+        }
+
+        const [result] = await db.query(query, params);
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Courier not found' });
+        }
+
+        // Need CourierId for tracking. If we used RefNumber, fetch the ID first.
+        let courierId;
+        if (/^\d+$/.test(id)) {
+            courierId = id;
+        } else {
+            const [rows] = await db.query('SELECT ID FROM tblcourier WHERE RefNumber = ?', [id]);
+            if (rows.length === 0) return res.status(404).json({ message: 'Courier not found' });
+            courierId = rows[0].ID;
+        }
+
+        // Insert tracking record
         await db.query(
             'INSERT INTO tblcouriertracking (CourierId, remark, status) VALUES (?, ?, ?)',
-            [id, remark, status]
+            [courierId, remark || 'Status updated', status]
         );
-        res.json({ message: 'Status updated' });
+
+        res.json({ message: 'Status updated successfully' });
     } catch (err) {
+        console.error('Update status error:', err);
         res.status(500).json({ message: err.message });
     }
 };

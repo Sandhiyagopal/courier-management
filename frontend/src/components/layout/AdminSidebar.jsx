@@ -12,7 +12,7 @@ import {
 const menuItems = [
   { path: '/admin', name: 'Dashboard', icon: LayoutDashboard },
   { path: '/admin/branches', name: 'Branches', icon: Building2 },
-  { path: '/admin/cms-staff', name: 'CMS Staff', icon: Package },
+//   { path: '/admin/cms-staff', name: 'CMS Staff', icon: Package },
   { path: '/admin/couriers', name: 'Courier', icon: Package },
   { path: '/admin/complaints', name: 'Complaints', icon: MessageSquare },
   { path: '/admin/pages', name: 'Pages', icon: Mail },

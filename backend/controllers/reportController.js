@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+
 exports.getCourierReport = async (req, res) => {
   const { fromDate, toDate } = req.query;
   const [rows] = await db.query(
@@ -11,7 +12,7 @@ exports.getCourierReport = async (req, res) => {
 
 exports.getRequestCount = async (req, res) => {
   const { fromDate, toDate } = req.query;
-  const [couriers] = await db.query('SELECT COUNT(*) as total FROM tblcourier WHERE DATE(CourierDate) BETWEEN ? AND ?', [fromDate, toDate]);
+  const [couriers] = await db.query('SELECTs COUNT(*) as total FROM tblcourier WHERE DATE(CourierDate) BETWEEN ? AND ?', [fromDate, toDate]);
   const [enquiries] = await db.query('SELECT COUNT(*) as total FROM tblcontact WHERE DATE(MsgDate) BETWEEN ? AND ?', [fromDate, toDate]);
   const [complaints] = await db.query('SELECT COUNT(*) as total FROM tblcomplains WHERE DATE(CompDate) BETWEEN ? AND ?', [fromDate, toDate]);
   res.json({

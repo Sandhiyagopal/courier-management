@@ -1,6 +1,8 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Logo from "../../assets/Logo.png"
+import Logo from "../../assets/Logo.png";
+import Footer from './Footer';
+
 const Layout = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -11,12 +13,13 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <nav className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link to="/" className="flex items-center text-2xl font-bold text-primary">
-          <img src={Logo} alt='logo' className='h-12 w-12' />
-          Courier Management</Link>
+            <img src={Logo} alt='logo' className='h-12 w-12' />
+            Courier Management
+          </Link>
           <div className="space-x-4">
             <Link to="/track" className="hover:text-blue-600">Track</Link>
             <Link to="/branches" className="hover:text-blue-600">Branches</Link>
@@ -33,9 +36,10 @@ const Layout = () => {
           </div>
         </div>
       </nav>
-      <main className="container mx-auto p-4">
+      <main className="grow p-5">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };
